@@ -1,0 +1,27 @@
+<div class="container">
+  <h2>Listado de Series</h2>
+
+  @if (cargando) {
+    <div class="cargando">Cargando series.....</div>
+  }
+
+  @if (error) {
+    <div class="error">
+      Error al cargar las series, intenta de nuevo.
+    </div>
+  }
+
+  @if (!cargando && !error && series.length > 0) {
+    <ul class="lista-series">
+      @for (serie of series; track serie._id) {
+        <li class="serie-item">
+          {{ serie.title }} | {{ serie.channel }} | {{ serie.rating }}
+        </li>
+      }
+    </ul>
+  }
+
+  @if (!cargando && !error && series.length === 0) {
+    <div class="cargando">No hay series disponibles</div>
+  }
+</div>

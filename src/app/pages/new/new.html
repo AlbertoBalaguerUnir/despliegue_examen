@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="contenedor-formulario">
+    <h2>Nueva Serie</h2>
+
+    @if (mensajeExito) {
+      <div class="mensaje-exito">{{ mensajeExito }}</div>
+    }
+
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+      
+
+      <div class="campo">
+        <label for="title">Título</label>
+        <input 
+          type="text" 
+          id="title" 
+          formControlName="title"
+          [class.invalido]="title?.invalid && title?.touched"
+        >
+        @if (title?.invalid && title?.touched) {
+          @if (title?.errors?.['required']) {
+            <div class="texto-error">El título es obligatorio</div>
+          }
+          @if (title?.errors?.['minlength']) {
+            <div class="texto-error">El título debe tener al menos 3 caracteres</div>
+          }
+        }
+      </div>
+
+      
+
+
+
+
+      <div class="campo">
+        <label for="channel">Canal</label>
+        <input 
+          type="text" 
+          id="channel" 
+          formControlName="channel"
+          [class.invalido]="channel?.invalid && channel?.touched"
+        >
+        @if (channel?.invalid && channel?.touched) {
+          <div class="texto-error">El canal es obligatorio</div>
+        }
+      </div>
+
+      
+
+
+
+      <div class="campo">
+        <label for="rating">Puntuación (0-10)</label>
+        <input 
+          type="number" 
+          id="rating" 
+          formControlName="rating"
+          step="0.1"
+          [class.invalido]="rating?.invalid && rating?.touched"
+        >
+        @if (rating?.invalid && rating?.touched) {
+          @if (rating?.errors?.['required']) {
+            <div class="texto-error">La puntuación es obligatoria</div>
+          }
+          @if (rating?.errors?.['min'] || rating?.errors?.['max']) {
+            <div class="texto-error">La puntuación debe estar entre 0 y 10</div>
+          }
+        }
+      </div>
+
+      
+      <button 
+        type="submit" 
+        [disabled]="formulario.invalid || enviando"
+      >
+        {{ enviando ? 'Enviando...' : 'Crear Serie' }}
+      </button>
+    </form>
+  </div>
+</div>

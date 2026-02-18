@@ -1,0 +1,15 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  background-color: #f8f8f8;
+}
+
+router-outlet + * {
+  display: block;
+  min-height: calc(100vh - 120px); /* Ajusta según altura header+footer */
+}
